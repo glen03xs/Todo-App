@@ -11,8 +11,13 @@ loadEventListeners();
 function loadEventListeners() {
 	// Add Todo Event
 	form.addEventListener('submit', addTodo);
-}
 
+	// Delete Task Event
+	todoList.addEventListener('click', deleteTodo);
+
+	// Delete All Todo's
+	clearButton.addEventListener('click', deleteAllTodos)
+}
 
 // Add Todo 
 function addTodo(e) {
@@ -42,4 +47,21 @@ function addTodo(e) {
 	todoInput.value = '';
 
 	e.preventDefault();
+}
+
+// Delete Todo
+function deleteTodo(e) {
+	if (e.target.parentElement.classList.contains('delete-item')) {
+		if(confirm('Do You Want to Delete Item?')) {
+			e.target.parentElement.parentElement.remove();
+		}
+	}
+}
+
+// Delete All Todo
+function deleteAllTodos() {
+
+	while(todoList.firstChild) {
+		todoList.removeChild(taskList.firstChild);
+	}
 }
