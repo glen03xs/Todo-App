@@ -15,8 +15,11 @@ function loadEventListeners() {
 	// Delete Task Event
 	todoList.addEventListener('click', deleteTodo);
 
-	// Delete All Todo's
-	clearButton.addEventListener('click', deleteAllTodos)
+	// Delete All Todo's Event
+	clearButton.addEventListener('click', deleteAllTodos);
+
+	// Filter Todo's Event
+	filter.addEventListener('keyup', filterTodo);
 }
 
 // Add Todo 
@@ -60,8 +63,20 @@ function deleteTodo(e) {
 
 // Delete All Todo
 function deleteAllTodos() {
-
 	while(todoList.firstChild) {
 		todoList.removeChild(taskList.firstChild);
 	}
+}
+
+// Filter Todo's
+function filterTodo(e) {
+	const text = e.target.value.toLowerCase();
+	document.querySelectorAll('.collection-item').forEach(function(todo) {
+		const item = todo.firstChild.textContent;
+			if(item.toLowerCase().indexOf(text) != -1) {
+				todo.style.display = 'block';
+			} else {
+				todo.style.display = 'none';
+			}
+	});
 }
